@@ -32,6 +32,7 @@ public class LampadaGirlController : MonoBehaviour
     [Header("Приседание")]
     public float standHeight = 1.2f;
     public float crouchHeight = 0.7f;
+    public bool crouchToggle = true;    // true — C нажать один раз; false — держать C
 
     [Header("Толкание ящиков")]
     public float pushPower = 2f;
@@ -47,6 +48,8 @@ public class LampadaGirlController : MonoBehaviour
     private CharacterController cc;
     private Vector3 horizontalVelocity;
     private float verticalVelocity;
+    private bool wantCrouch;
+    private float animSpeed;            // скорость для Animator (без учёта замедления вглубь)
 
     void Awake()
     {
@@ -67,7 +70,19 @@ public class LampadaGirlController : MonoBehaviour
         if (input.sqrMagnitude > 1f) input.Normalize();
 
         // ---------- 2. Приседание ----------
-        bool crouchKey = Input.GetKey(KeyCode.C) || Input.GetKey(KeyCode.LeftControl);
+        if (crouchToggle)
+        {
+            // Нажала C — села, нажала ещё раз — встала
+            if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.LeftControl))
+                wantCrouch = !wantCrouch;
+        }
+        else
+        {
+            // Держишь C — сидишь, отпустила — встаёшь
+            wantCrouch = Input.GetKey(KeyCode.C) || Input.GetKey(KeyCode.LeftControl);
+        }
+
+        bool crouchKey = wantCrouch;
         if (crouchKey && !IsCrouching)
         {
             IsCrouching = true;
@@ -87,6 +102,13 @@ public class LampadaGirlController : MonoBehaviour
         Vector3 target = input * speed;
         horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, target, acceleration * Time.deltaTime);
         CurrentSpeed = horizontalVelocity.magnitude;
+
+        // Для анимации: когда идём вглубь, ноги должны шагать так же, как при ходьбе вбок,
+        // иначе Animator решает, что мы «почти стоим», и персонаж скользит
+        if (target.magnitude > 0.01f)
+            animSpeed = speed * Mathf.Clamp01(CurrentSpeed / target.magnitude);
+        else
+            animSpeed = CurrentSpeed;
 
         // ---------- 4. Прыжок и гравитация ----------
         if (grounded && verticalVelocity < 0f)
@@ -113,7 +135,7 @@ public class LampadaGirlController : MonoBehaviour
         // ---------- 7. Анимация ----------
         if (animator != null)
         {
-            SetFloat("Speed", CurrentSpeed);
+            SetFloat("Speed", animSpeed);
             SetBool("Grounded", cc.isGrounded);
             SetBool("Crouch", IsCrouching);
         }
