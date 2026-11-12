@@ -438,7 +438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &335753165
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1111,7 +1111,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 356198633}
-  - component: {fileID: 356332146}
   m_Layer: 0
   m_Name: SM_Door_01
   m_TagString: Untagged
@@ -1148,6 +1147,7 @@ GameObject:
   - component: {fileID: 356198637}
   - component: {fileID: 353331405}
   - component: {fileID: 354298381}
+  - component: {fileID: 356299982}
   m_Layer: 0
   m_Name: Door_01_C
   m_TagString: Untagged
@@ -1155,6 +1155,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &356299982
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356299981}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2372003, y: 2.5489, z: 0.13960004}
+  m_Center: {x: 0, y: 1.27445, z: -0.031299535}
 --- !u!1 &356299983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,27 +1194,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &356332146
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356299977}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &435706426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LampadaDrawer
   hasKey: 1
   giveFlag: key_exit
-  requiredFlag: 
+  requiredFlag: code_seen
   lockedText: "\u0417\u0430\u043F\u0435\u0440\u0442\u043E. \u041D\u0430 \u0437\u0430\u043C\u043A\u0435
     \u043A\u0440\u043E\u0448\u0435\u0447\u043D\u044B\u0435 \u0446\u0438\u0444\u0440\u044B..."
   openOffset: {x: 0, y: 0, z: -0.35}
@@ -1760,7 +1760,7 @@ GameObject:
   - component: {fileID: 567049373}
   - component: {fileID: 567049372}
   m_Layer: 0
-  m_Name: Room2Buld
+  m_Name: Room2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2916,7 +2916,7 @@ GameObject:
   - component: {fileID: 1250854061}
   - component: {fileID: 1250854063}
   m_Layer: 0
-  m_Name: CeilingBulb
+  m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3339,7 +3339,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
