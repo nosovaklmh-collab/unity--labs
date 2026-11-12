@@ -16,6 +16,7 @@ public class LampadaHiddenSign : MonoBehaviour
 
     [Header("Подсказка при первом появлении")]
     public string discoverText = "На обоях проступила цифра...";
+    public string giveFlag = "code_seen";  // какой флаг получает девочка, когда увидела знак
 
     private TMP_Text text;
     private float alpha;
@@ -50,6 +51,8 @@ public class LampadaHiddenSign : MonoBehaviour
         if (!discovered && alpha > 0.9f)
         {
             discovered = true;
+            var flags = FindFirstObjectByType<LampadaFlags>();
+            if (flags != null) flags.Add(giveFlag);
             message = discoverText;
             messageTimer = 3f;
         }

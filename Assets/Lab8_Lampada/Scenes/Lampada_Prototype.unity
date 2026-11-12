@@ -17,10 +17,10 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.02, g: 0.02, b: 0.03, a: 1}
   m_FogMode: 2
-  m_FogDensity: 0.03
+  m_FogDensity: 0.015
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.05, g: 0.06, b: 0.09, a: 1}
+  m_AmbientSkyColor: {r: 0.11120505, g: 0.12791818, b: 0.1981132, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -421,6 +421,96 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335224295}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &335753164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 335753167}
+  - component: {fileID: 335753166}
+  - component: {fileID: 335753165}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &335753165
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335753164}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0e82578b89c5e1c47ac7df924e30844e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &335753166
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335753164}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &335753167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335753164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1250854062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &338694526
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,11 +688,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LampadaDrawer
   hasKey: 0
   giveFlag: key_exit
+  requiredFlag: 
+  lockedText: "\u0417\u0430\u043F\u0435\u0440\u0442\u043E. \u041D\u0430 \u0437\u0430\u043C\u043A\u0435
+    \u043A\u0440\u043E\u0448\u0435\u0447\u043D\u044B\u0435 \u0446\u0438\u0444\u0440\u044B..."
   openOffset: {x: 0, y: 0, z: -0.35}
   openSpeed: 1
   emptyText: "\u041F\u0443\u0441\u0442\u043E..."
   foundText: "\u0412\u043D\u0443\u0442\u0440\u0438 \u043A\u043B\u044E\u0447!"
   OnOpened:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClosed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &341296195
@@ -1147,11 +1243,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LampadaDrawer
   hasKey: 1
   giveFlag: key_exit
+  requiredFlag: 
+  lockedText: "\u0417\u0430\u043F\u0435\u0440\u0442\u043E. \u041D\u0430 \u0437\u0430\u043C\u043A\u0435
+    \u043A\u0440\u043E\u0448\u0435\u0447\u043D\u044B\u0435 \u0446\u0438\u0444\u0440\u044B..."
   openOffset: {x: 0, y: 0, z: -0.35}
   openSpeed: 1
   emptyText: "\u041F\u0443\u0441\u0442\u043E..."
   foundText: "\u0412\u043D\u0443\u0442\u0440\u0438 \u043A\u043B\u044E\u0447!"
   OnOpened:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClosed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &435706429
@@ -1556,6 +1658,96 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e089ae1c9732b8418eb03b7b373e87e, type: 3}
+--- !u!1 &549983171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 549983172}
+  - component: {fileID: 549983174}
+  - component: {fileID: 549983173}
+  m_Layer: 0
+  m_Name: Glass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &549983172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549983171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 567049371}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &549983173
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549983171}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0e82578b89c5e1c47ac7df924e30844e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &549983174
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549983171}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &567049370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,10 +1775,11 @@ Transform:
   m_GameObject: {fileID: 567049370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 4.5, z: 1.5}
+  m_LocalPosition: {x: 7.5, y: 3.5, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 549983172}
   m_Father: {fileID: 1906529391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567049372
@@ -1629,7 +1822,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 20
   m_Range: 6
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2533,6 +2726,7 @@ MonoBehaviour:
   - {fileID: 567049373}
   discoverText: "\u041D\u0430 \u043E\u0431\u043E\u044F\u0445 \u043F\u0440\u043E\u0441\u0442\u0443\u043F\u0438\u043B\u0430
     \u0446\u0438\u0444\u0440\u0430..."
+  giveFlag: code_seen
 --- !u!114 &1161437447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2739,7 +2933,7 @@ Light:
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 1, g: 0.9, b: 0.7, a: 1}
-  m_Intensity: 3
+  m_Intensity: 15
   m_Range: 7
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2802,10 +2996,11 @@ Transform:
   m_GameObject: {fileID: 1250854060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 4.5, z: 1.5}
+  m_LocalPosition: {x: -6, y: 3.5, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 335753167}
   m_Father: {fileID: 1906529391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1250854063
@@ -2889,7 +3084,19 @@ MonoBehaviour:
   isOn: 0
   OnSwitched:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 335753164}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   lever: {fileID: 0}
   leverAngle: 40
 --- !u!23 &1251843167
@@ -3277,11 +3484,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LampadaDrawer
   hasKey: 0
   giveFlag: key_exit
+  requiredFlag: 
+  lockedText: "\u0417\u0430\u043F\u0435\u0440\u0442\u043E. \u041D\u0430 \u0437\u0430\u043C\u043A\u0435
+    \u043A\u0440\u043E\u0448\u0435\u0447\u043D\u044B\u0435 \u0446\u0438\u0444\u0440\u044B..."
   openOffset: {x: 0, y: 0, z: -0.35}
   openSpeed: 1
   emptyText: "\u041F\u0443\u0441\u0442\u043E..."
   foundText: "\u0412\u043D\u0443\u0442\u0440\u0438 \u043A\u043B\u044E\u0447!"
   OnOpened:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClosed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1417565553
@@ -4212,7 +4425,19 @@ MonoBehaviour:
   isOn: 1
   OnSwitched:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 549983171}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   lever: {fileID: 0}
   leverAngle: 40
 --- !u!23 &1878228742

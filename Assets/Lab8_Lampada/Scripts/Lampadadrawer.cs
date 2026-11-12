@@ -1,27 +1,34 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.Events;
 
-// «Лампада» — ящик комода. E — выдвинуть.
-// В одном ящике ключ (Has Key), остальные пустые.
-// Ключ — это флаг у игрока (скрипт LampadaFlags на Player).
+// В«Р›Р°РјРїР°РґР°В» вЂ” СЏС‰РёРє РєРѕРјРѕРґР°. E вЂ” РІС‹РґРІРёРЅСѓС‚СЊ, РµС‰С‘ СЂР°Р· E вЂ” Р·Р°РґРІРёРЅСѓС‚СЊ.
+// Р’ РѕРґРЅРѕРј СЏС‰РёРєРµ РєР»СЋС‡ (Has Key): РєР»СЋС‡ РІС‹РґР°С‘С‚СЃСЏ РѕРґРёРЅ СЂР°Р·, СЌС‚Рѕ С„Р»Р°Рі Сѓ РёРіСЂРѕРєР° (LampadaFlags).
+// РЇС‰РёРє РјРѕР¶РµС‚ Р±С‹С‚СЊ Р·Р°РїРµСЂС‚ (Required Flag): РЅР°РїСЂРёРјРµСЂ, РЅР° РєРѕРґРѕРІС‹Р№ Р·Р°РјРѕРє,
+// Рё РѕС‚РєСЂРѕРµС‚СЃСЏ, С‚РѕР»СЊРєРѕ РєРѕРіРґР° РґРµРІРѕС‡РєР° СѓРІРёРґРµР»Р° РєРѕРґ РЅР° СЃС‚РµРЅРµ (С„Р»Р°Рі "code_seen").
 //
-// Вешается на ящик (кубик с коллайдером).
+// Р’РµС€Р°РµС‚СЃСЏ РЅР° СЏС‰РёРє (РєСѓР±РёРє СЃ РєРѕР»Р»Р°Р№РґРµСЂРѕРј).
 public class LampadaDrawer : MonoBehaviour, IInteractable
 {
     public bool hasKey = false;
-    public string giveFlag = "key_exit";            // какой флаг получает девочка
+    public string giveFlag = "key_exit";            // РєР°РєРѕР№ С„Р»Р°Рі РїРѕР»СѓС‡Р°РµС‚ РґРµРІРѕС‡РєР°
 
-    [Header("Движение")]
-    public Vector3 openOffset = new Vector3(0f, 0f, -0.35f); // куда выдвигается (к камере)
+    [Header("Р—Р°РјРѕРє (РЅРµРѕР±СЏР·Р°С‚РµР»СЊРЅРѕ)")]
+    public string requiredFlag = "";                // РїСѓСЃС‚Рѕ вЂ” РЅРµ Р·Р°РїРµСЂС‚; "code_seen" вЂ” РЅСѓР¶РµРЅ РєРѕРґ СЃРѕ СЃС‚РµРЅС‹
+    public string lockedText = "Р—Р°РїРµСЂС‚Рѕ. РќР° Р·Р°РјРєРµ РєСЂРѕС€РµС‡РЅС‹Рµ С†РёС„СЂС‹...";
+
+    [Header("Р”РІРёР¶РµРЅРёРµ")]
+    public Vector3 openOffset = new Vector3(0f, 0f, -0.35f); // РєСѓРґР° РІС‹РґРІРёРіР°РµС‚СЃСЏ (Рє РєР°РјРµСЂРµ)
     public float openSpeed = 1f;
 
-    [Header("Подсказки")]
-    public string emptyText = "Пусто...";
-    public string foundText = "Внутри ключ!";
+    [Header("РџРѕРґСЃРєР°Р·РєРё")]
+    public string emptyText = "РџСѓСЃС‚Рѕ...";
+    public string foundText = "Р’РЅСѓС‚СЂРё РєР»СЋС‡!";
 
-    public UnityEvent OnOpened;                     // например, звук скрипа
+    public UnityEvent OnOpened;                     // РЅР°РїСЂРёРјРµСЂ, Р·РІСѓРє СЃРєСЂРёРїР°
+    public UnityEvent OnClosed;
 
     private bool isOpen;
+    private bool keyTaken;
     private Vector3 closedPosition;
     private string message;
     private float messageTimer;
@@ -33,15 +40,31 @@ public class LampadaDrawer : MonoBehaviour, IInteractable
 
     public void Interact(GameObject actor)
     {
-        if (isOpen) return;
+        var flags = actor.GetComponent<LampadaFlags>();
+
+        // РЈР¶Рµ РѕС‚РєСЂС‹С‚ вЂ” РїСЂРѕСЃС‚Рѕ Р·Р°РґРІРёРіР°РµРј
+        if (isOpen)
+        {
+            isOpen = false;
+            OnClosed?.Invoke();
+            return;
+        }
+
+        // Р—Р°РїРµСЂС‚ Рё РєРѕРґР° РµС‰С‘ РЅРµС‚
+        if (!string.IsNullOrEmpty(requiredFlag) && (flags == null || !flags.Has(requiredFlag)))
+        {
+            Show(lockedText);
+            return;
+        }
+
         isOpen = true;
         OnOpened?.Invoke();
 
-        if (hasKey)
+        if (hasKey && !keyTaken)
         {
-            var flags = actor.GetComponent<LampadaFlags>();
+            keyTaken = true;
             if (flags != null) flags.Add(giveFlag);
-            else Debug.LogWarning("Лампада: на Player нет скрипта LampadaFlags — ключ некуда положить");
+            else Debug.LogWarning("Р›Р°РјРїР°РґР°: РЅР° Player РЅРµС‚ СЃРєСЂРёРїС‚Р° LampadaFlags вЂ” РєР»СЋС‡ РЅРµРєСѓРґР° РїРѕР»РѕР¶РёС‚СЊ");
             Show(foundText);
         }
         else

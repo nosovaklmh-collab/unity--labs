@@ -1,41 +1,41 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-// «Лампада» — головоломка «Высокая ручка».
-// Ручка двери висит высоко: с пола девочка до неё не дотягивается.
-// Нужно подтолкнуть ящик к двери, запрыгнуть на него и нажать E — дверь уедет вверх.
+// В«Р›Р°РјРїР°РґР°В» вЂ” РіРѕР»РѕРІРѕР»РѕРјРєР° В«Р’С‹СЃРѕРєР°СЏ СЂСѓС‡РєР°В».
+// Р СѓС‡РєР° РґРІРµСЂРё РІРёСЃРёС‚ РІС‹СЃРѕРєРѕ: СЃ РїРѕР»Р° РґРµРІРѕС‡РєР° РґРѕ РЅРµС‘ РЅРµ РґРѕС‚СЏРіРёРІР°РµС‚СЃСЏ.
+// РќСѓР¶РЅРѕ РїРѕРґС‚РѕР»РєРЅСѓС‚СЊ СЏС‰РёРє Рє РґРІРµСЂРё, Р·Р°РїСЂС‹РіРЅСѓС‚СЊ РЅР° РЅРµРіРѕ Рё РЅР°Р¶Р°С‚СЊ E вЂ” РґРІРµСЂСЊ СѓРµРґРµС‚ РІРІРµСЂС….
 //
-// Вешается на объект-ручку (у ручки должен быть коллайдер).
-// В поле Door перетащите саму дверь (ручка может быть её дочерним объектом).
+// Р’РµС€Р°РµС‚СЃСЏ РЅР° РѕР±СЉРµРєС‚-СЂСѓС‡РєСѓ (Сѓ СЂСѓС‡РєРё РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РєРѕР»Р»Р°Р№РґРµСЂ).
+// Р’ РїРѕР»Рµ Door РїРµСЂРµС‚Р°С‰РёС‚Рµ СЃР°РјСѓ РґРІРµСЂСЊ (СЂСѓС‡РєР° РјРѕР¶РµС‚ Р±С‹С‚СЊ РµС‘ РґРѕС‡РµСЂРЅРёРј РѕР±СЉРµРєС‚РѕРј).
 public class LampadaDoor : MonoBehaviour, IInteractable
 {
-    [Header("Дверь")]
-    public Transform door;                              // что двигаем (для поворота — объект-петля)
+    [Header("Р”РІРµСЂСЊ")]
+    public Transform door;                              // С‡С‚Рѕ РґРІРёРіР°РµРј (РґР»СЏ РїРѕРІРѕСЂРѕС‚Р° вЂ” РѕР±СЉРµРєС‚-РїРµС‚Р»СЏ)
 
-    [Tooltip("Включено — дверь поворачивается на петлях. Выключено — уезжает вверх.")]
+    [Tooltip("Р’РєР»СЋС‡РµРЅРѕ вЂ” РґРІРµСЂСЊ РїРѕРІРѕСЂР°С‡РёРІР°РµС‚СЃСЏ РЅР° РїРµС‚Р»СЏС…. Р’С‹РєР»СЋС‡РµРЅРѕ вЂ” СѓРµР·Р¶Р°РµС‚ РІРІРµСЂС….")]
     public bool swing = true;
-    public float openAngle = 90f;                       // на сколько градусов открывается (минус — в другую сторону)
-    public float swingSpeed = 90f;                      // градусов в секунду
+    public float openAngle = 90f;                       // РЅР° СЃРєРѕР»СЊРєРѕ РіСЂР°РґСѓСЃРѕРІ РѕС‚РєСЂС‹РІР°РµС‚СЃСЏ (РјРёРЅСѓСЃ вЂ” РІ РґСЂСѓРіСѓСЋ СЃС‚РѕСЂРѕРЅСѓ)
+    public float swingSpeed = 90f;                      // РіСЂР°РґСѓСЃРѕРІ РІ СЃРµРєСѓРЅРґСѓ
 
-    public Vector3 openOffset = new Vector3(0f, 3f, 0f); // для подъёмной двери: куда уезжает
+    public Vector3 openOffset = new Vector3(0f, 3f, 0f); // РґР»СЏ РїРѕРґСЉС‘РјРЅРѕР№ РґРІРµСЂРё: РєСѓРґР° СѓРµР·Р¶Р°РµС‚
     public float openSpeed = 1.5f;
 
-    [Header("Условие")]
-    public float minPlayerHeight = 0.4f;   // ноги девочки должны быть выше этой высоты (стоит на ящике); 0 — без проверки
-    public string requiredFlag = "";       // нужен ли ключ (флаг из LampadaFlags), например "key_exit"; пусто — не нужен
+    [Header("РЈСЃР»РѕРІРёРµ")]
+    public float minPlayerHeight = 0.4f;   // РЅРѕРіРё РґРµРІРѕС‡РєРё РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РІС‹С€Рµ СЌС‚РѕР№ РІС‹СЃРѕС‚С‹ (СЃС‚РѕРёС‚ РЅР° СЏС‰РёРєРµ); 0 вЂ” Р±РµР· РїСЂРѕРІРµСЂРєРё
+    public string requiredFlag = "";       // РЅСѓР¶РµРЅ Р»Рё РєР»СЋС‡ (С„Р»Р°Рі РёР· LampadaFlags), РЅР°РїСЂРёРјРµСЂ "key_exit"; РїСѓСЃС‚Рѕ вЂ” РЅРµ РЅСѓР¶РµРЅ
 
-    [Header("Подсказки на экране")]
-    public string tooHighText = "Слишком высоко... Нужно на что-то встать.";
-    public string openedText = "Дверь открылась";
-    public string lockedText = "Заперто. Нужен ключ.";
+    [Header("РџРѕРґСЃРєР°Р·РєРё РЅР° СЌРєСЂР°РЅРµ")]
+    public string tooHighText = "РЎР»РёС€РєРѕРј РІС‹СЃРѕРєРѕ... РќСѓР¶РЅРѕ РЅР° С‡С‚Рѕ-С‚Рѕ РІСЃС‚Р°С‚СЊ.";
+    public string openedText = "Р”РІРµСЂСЊ РѕС‚РєСЂС‹Р»Р°СЃСЊ";
+    public string lockedText = "Р—Р°РїРµСЂС‚Рѕ. РќСѓР¶РµРЅ РєР»СЋС‡.";
 
     public bool isOpen;
-    [Tooltip("После первого открытия E открывает и закрывает дверь сколько угодно раз")]
+    [Tooltip("РџРѕСЃР»Рµ РїРµСЂРІРѕРіРѕ РѕС‚РєСЂС‹С‚РёСЏ E РѕС‚РєСЂС‹РІР°РµС‚ Рё Р·Р°РєСЂС‹РІР°РµС‚ РґРІРµСЂСЊ СЃРєРѕР»СЊРєРѕ СѓРіРѕРґРЅРѕ СЂР°Р·")]
     public bool canClose = true;
-    public UnityEvent OnOpened;            // сюда можно добавить звук, свет и т.п.
+    public UnityEvent OnOpened;            // СЃСЋРґР° РјРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ Р·РІСѓРє, СЃРІРµС‚ Рё С‚.Рї.
     public UnityEvent OnClosed;
 
-    private bool unlocked;                 // дверь уже открывали — условия больше не проверяем
+    private bool unlocked;                 // РґРІРµСЂСЊ СѓР¶Рµ РѕС‚РєСЂС‹РІР°Р»Рё вЂ” СѓСЃР»РѕРІРёСЏ Р±РѕР»СЊС€Рµ РЅРµ РїСЂРѕРІРµСЂСЏРµРј
     private Vector3 closedPosition;
     private Quaternion closedRotation;
     private string message;
@@ -46,12 +46,12 @@ public class LampadaDoor : MonoBehaviour, IInteractable
         if (door == null) door = transform;
         closedPosition = door.position;
         closedRotation = door.localRotation;
-        if (isOpen) unlocked = true;       // если дверь открыта с самого начала (для отладки)
+        if (isOpen) unlocked = true;       // РµСЃР»Рё РґРІРµСЂСЊ РѕС‚РєСЂС‹С‚Р° СЃ СЃР°РјРѕРіРѕ РЅР°С‡Р°Р»Р° (РґР»СЏ РѕС‚Р»Р°РґРєРё)
     }
 
     public void Interact(GameObject actor)
     {
-        // Уже открывали раньше — просто открываем/закрываем
+        // РЈР¶Рµ РѕС‚РєСЂС‹РІР°Р»Рё СЂР°РЅСЊС€Рµ вЂ” РїСЂРѕСЃС‚Рѕ РѕС‚РєСЂС‹РІР°РµРј/Р·Р°РєСЂС‹РІР°РµРј
         if (unlocked)
         {
             if (!canClose && isOpen) return;
@@ -60,14 +60,16 @@ public class LampadaDoor : MonoBehaviour, IInteractable
             return;
         }
 
-        // Проверяем, стоит ли девочка на чём-то высоком
-        if (actor.transform.position.y < minPlayerHeight)
+        // РџСЂРѕРІРµСЂСЏРµРј, СЃС‚РѕРёС‚ Р»Рё РґРµРІРѕС‡РєР° РЅР° С‡С‘Рј-С‚Рѕ РІС‹СЃРѕРєРѕРј (РёРјРµРЅРЅРѕ СЃС‚РѕРёС‚, Р° РЅРµ РїРѕРґРїСЂС‹РіРЅСѓР»Р°)
+        var cc = actor.GetComponent<CharacterController>();
+        bool grounded = cc == null || cc.isGrounded;
+        if (minPlayerHeight > 0f && (!grounded || actor.transform.position.y < minPlayerHeight))
         {
             ShowMessage(tooHighText);
             return;
         }
 
-        // Нужен ли ключ
+        // РќСѓР¶РµРЅ Р»Рё РєР»СЋС‡
         if (!string.IsNullOrEmpty(requiredFlag))
         {
             var flags = actor.GetComponent<LampadaFlags>();
@@ -88,13 +90,13 @@ public class LampadaDoor : MonoBehaviour, IInteractable
     {
         if (swing)
         {
-            // Поворот вокруг вертикальной оси петли
+            // РџРѕРІРѕСЂРѕС‚ РІРѕРєСЂСѓРі РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ РѕСЃРё РїРµС‚Р»Рё
             Quaternion targetRot = isOpen ? closedRotation * Quaternion.Euler(0f, openAngle, 0f) : closedRotation;
             door.localRotation = Quaternion.RotateTowards(door.localRotation, targetRot, swingSpeed * Time.deltaTime);
         }
         else
         {
-            // Подъёмная дверь: плавно едет вверх
+            // РџРѕРґСЉС‘РјРЅР°СЏ РґРІРµСЂСЊ: РїР»Р°РІРЅРѕ РµРґРµС‚ РІРІРµСЂС…
             Vector3 target = isOpen ? closedPosition + openOffset : closedPosition;
             door.position = Vector3.MoveTowards(door.position, target, openSpeed * Time.deltaTime);
         }
